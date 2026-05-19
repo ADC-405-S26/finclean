@@ -2,12 +2,17 @@
 % Please edit documentation in R/parse_currency.R
 \name{parse_currency}
 \alias{parse_currency}
-\title{Parse Currency Strings to Numeric}
+\title{Parse Currency Strings to Numeric
+Converts messy currency strings commonly found in financial data into clean
+numeric values. Handles currency symbols, commas, spaces, and accounting-style
+negative numbers written in parentheses.}
 \usage{
 parse_currency(x, na_on_fail = TRUE)
 }
 \arguments{
-\item{x}{A character vector of currency strings to convert.}
+\item{x}{A character vector of currency strings to convert.
+Examples of supported formats: \code{"$1,234.56"}, \code{"€500"},
+\code{"(1,200)"}, \code{"-$300.00"}, \code{"1 000.50"}.}
 
 \item{na_on_fail}{Logical. If \code{TRUE} (default), values that cannot be
 parsed will be returned as \code{NA} with a warning. If \code{FALSE}, the
@@ -20,6 +25,9 @@ correctly converted to \code{-500}.
 }
 \description{
 Parse Currency Strings to Numeric
+Converts messy currency strings commonly found in financial data into clean
+numeric values. Handles currency symbols, commas, spaces, and accounting-style
+negative numbers written in parentheses.
 }
 \examples{
 parse_currency(c("$1,234.56", "EUR500", "(1,200)", "-$300.00"))

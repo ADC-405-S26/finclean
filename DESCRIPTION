@@ -10,3 +10,6 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 8.0.0
 Imports: 
     checkmate
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
