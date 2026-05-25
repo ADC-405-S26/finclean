@@ -1,0 +1,41 @@
+#' Sample Messy Financial Dataset
+#'
+#' A small dataset containing common data quality issues found in real-world
+#' financial data. Includes inconsistent fiscal year formats, account name
+#' variations, messy currency strings, numeric values with outliers, and
+#' missing values. Designed to demonstrate all functions in the
+#' \code{finclean} package.
+#'
+#' @format A data frame with 10 rows and 5 columns:
+#' \describe{
+#'   \item{period}{Character. Fiscal year/quarter strings in various formats
+#'     e.g. \code{"FY23"}, \code{"Q1 2023"}, \code{"2023-Q2"}.}
+#'   \item{account}{Character. Account name strings with inconsistent
+#'     capitalization and abbreviations e.g. \code{"Rev."}, \code{"REVENUE"}.}
+#'   \item{amount}{Character. Currency strings in various messy formats
+#'     e.g. \code{"$1,234.56"}, \code{"(1,200)"}, \code{"-$300.00"}.}
+#'   \item{revenue}{Numeric. Revenue values including an extreme outlier
+#'     and a missing value.}
+#'   \item{expenses}{Numeric. Expense values with no missing entries.}
+#' }
+#'
+#' @examples
+#' data(finclean_sample)
+#' head(finclean_sample)
+#'
+#' # Parse the messy currency column
+#' parse_currency(finclean_sample$amount)
+#'
+#' # Standardize the fiscal year column
+#' standardize_fiscal_year(finclean_sample$period)
+#'
+#' # Normalize the account name column
+#' normalize_accounts(finclean_sample$account)
+#'
+#' # Flag outliers in the revenue column
+#' flag_outliers(finclean_sample$revenue)
+#'
+#' # Run a full audit on the dataset
+#' audit_report(finclean_sample)
+#'
+"finclean_sample"

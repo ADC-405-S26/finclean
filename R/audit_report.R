@@ -1,4 +1,5 @@
 #' Generate a Data Quality Audit Report
+#'
 #' Scans a data frame and returns a summary of data quality issues commonly
 #' found in financial datasets. For each column, the report includes the number
 #' of missing values, duplicates, and for numeric columns, the number of

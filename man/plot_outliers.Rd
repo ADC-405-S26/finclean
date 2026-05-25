@@ -2,10 +2,7 @@
 % Please edit documentation in R/plot_outliers.R
 \name{plot_outliers}
 \alias{plot_outliers}
-\title{Plot Outliers in a Numeric Column
-Generates a ggplot2 boxplot for a numeric column from a data frame,
-highlighting flagged outlier points in red. Outliers are detected using
-\code{flag_outliers()} and overlaid on the plot for easy visual identification.}
+\title{Plot Outliers in a Numeric Column}
 \usage{
 plot_outliers(df, column, method = "iqr", threshold = NULL, title = NULL)
 }
@@ -26,17 +23,17 @@ For \code{"zscore"}, this is the z-score cutoff (default \code{3}).}
 \code{"Outlier Detection: <column>"}.}
 }
 \value{
-A \code{ggplot2} object displaying a boxplot of the specified column
-with outlier points highlighted in red.
+A \code{ggplot2} object displaying a bar chart of the specified
+column with outlier bars highlighted in red and normal bars in steelblue.
 }
 \description{
-Plot Outliers in a Numeric Column
-Generates a ggplot2 boxplot for a numeric column from a data frame,
-highlighting flagged outlier points in red. Outliers are detected using
-\code{flag_outliers()} and overlaid on the plot for easy visual identification.
+Generates a ggplot2 bar chart for a numeric column from a data frame,
+highlighting flagged outlier bars in red. Outliers are detected using
+\code{flag_outliers()} and colored differently for easy visual identification.
 }
 \examples{
 df <- data.frame(revenue = c(100, 200, 150, 10000, 130, 170, 160, 140))
 plot_outliers(df, column = "revenue")
 plot_outliers(df, column = "revenue", method = "zscore", threshold = 2)
+
 }

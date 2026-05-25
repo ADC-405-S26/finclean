@@ -2,11 +2,7 @@
 % Please edit documentation in R/audit_report.R
 \name{audit_report}
 \alias{audit_report}
-\title{Generate a Data Quality Audit Report
-Scans a data frame and returns a summary of data quality issues commonly
-found in financial datasets. For each column, the report includes the number
-of missing values, duplicates, and for numeric columns, the number of
-outliers detected using the IQR method.}
+\title{Generate a Data Quality Audit Report}
 \usage{
 audit_report(df, outlier_method = "iqr", threshold = NULL)
 }
@@ -34,7 +30,6 @@ columns:
 }
 }
 \description{
-Generate a Data Quality Audit Report
 Scans a data frame and returns a summary of data quality issues commonly
 found in financial datasets. For each column, the report includes the number
 of missing values, duplicates, and for numeric columns, the number of

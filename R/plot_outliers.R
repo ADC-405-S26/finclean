@@ -1,7 +1,9 @@
 #' Plot Outliers in a Numeric Column
-#' Generates a ggplot2 boxplot for a numeric column from a data frame,
-#' highlighting flagged outlier points in red. Outliers are detected using
-#' \code{flag_outliers()} and overlaid on the plot for easy visual identification.
+#'
+#' Generates a ggplot2 bar chart for a numeric column from a data frame,
+#' highlighting flagged outlier bars in red. Outliers are detected using
+#' \code{flag_outliers()} and colored differently for easy visual identification.
+#'
 #' @param df A data frame containing the column to plot.
 #' @param column A single character string specifying the name of the numeric
 #'   column in \code{df} to visualize.
@@ -13,16 +15,17 @@
 #' @param title A single character string for the plot title. Defaults to
 #'   \code{"Outlier Detection: <column>"}.
 #'
-#' @returns A \code{ggplot2} object displaying a boxplot of the specified column
-#'   with outlier points highlighted in red.
-#' @export
-#' @importFrom ggplot2 ggplot aes geom_boxplot geom_point scale_color_manual labs theme_minimal theme element_text position_jitter
-#' @importFrom rlang .data
+#' @return A \code{ggplot2} object displaying a bar chart of the specified
+#'   column with outlier bars highlighted in red and normal bars in steelblue.
+#'
 #' @examples
 #' df <- data.frame(revenue = c(100, 200, 150, 10000, 130, 170, 160, 140))
 #' plot_outliers(df, column = "revenue")
 #' plot_outliers(df, column = "revenue", method = "zscore", threshold = 2)
-
+#'
+#' @importFrom ggplot2 ggplot aes geom_bar scale_fill_manual labs theme_minimal theme element_text
+#' @importFrom rlang .data
+#' @export
 plot_outliers <- function(df, column, method = "iqr", threshold = NULL, title = NULL) {
   checkmate::assert_data_frame(df)
   checkmate::assert_string(column)
@@ -38,36 +41,34 @@ plot_outliers <- function(df, column, method = "iqr", threshold = NULL, title = 
     stop(paste0("Column '", column, "' must be numeric."))
   }
 
+
   flagged <- flag_outliers(df[[column]], method = method, threshold = threshold)
+
   plot_df <- data.frame(
+    index      = seq_along(flagged$value),
     value      = flagged$value,
-    is_outlier = flagged$is_outlier,
-    x_axis     = column
+    is_outlier = ifelse(flagged$is_outlier, "Outlier", "Normal")
   )
 
   plot_title <- if (!is.null(title)) title else paste("Outlier Detection:", column)
 
-  ggplot2::ggplot(plot_df, ggplot2::aes(x = .data$x_axis, y = .data$value)) +
-    ggplot2::geom_boxplot(outlier.shape = NA, fill = "grey92", color = "grey40") +
-    ggplot2::geom_point(
-      ggplot2::aes(color = .data$is_outlier),
-      position = ggplot2::position_jitter(width = 0.05, seed = 1),
-      size = 2.5,
-      alpha = 0.8
-    ) +
-    ggplot2::scale_color_manual(
-      values = c("FALSE" = "steelblue", "TRUE" = "red"),
-      labels = c("FALSE" = "Normal", "TRUE" = "Outlier"),
+  ggplot2::ggplot(
+    plot_df,
+    ggplot2::aes(x = .data$index, y = .data$value, fill = .data$is_outlier)
+  ) +
+    ggplot2::geom_bar(stat = "identity") +
+    ggplot2::scale_fill_manual(
+      values = c("Normal" = "steelblue", "Outlier" = "red"),
       name   = NULL
     ) +
     ggplot2::labs(
       title = plot_title,
-      x     = NULL,
+      x     = "Observation Index",
       y     = column
     ) +
     ggplot2::theme_minimal() +
     ggplot2::theme(
-      plot.title   = ggplot2::element_text(face = "bold", size = 13),
-      axis.text.x  = ggplot2::element_text(size = 11)
+      plot.title  = ggplot2::element_text(face = "bold", size = 13),
+      axis.text.x = ggplot2::element_text(size = 11)
     )
 }

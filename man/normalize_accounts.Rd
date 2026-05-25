@@ -2,11 +2,7 @@
 % Please edit documentation in R/normalize_accounts.R
 \name{normalize_accounts}
 \alias{normalize_accounts}
-\title{Normalize Account Name Variations
-Standardizes inconsistent account name strings commonly found in financial
-data into a single consistent label. For example, variations like
-\code{"Rev."}, \code{"REVENUE"}, and \code{"revenue"} are all mapped to
-\code{"Revenue"}. Users can also supply their own custom mapping.}
+\title{Normalize Account Name Variations}
 \usage{
 normalize_accounts(x, custom_map = NULL, na_on_fail = TRUE)
 }
@@ -28,7 +24,6 @@ variations replaced by their standardized labels. Unmatched values are
 returned as \code{NA} or unchanged depending on \code{na_on_fail}.
 }
 \description{
-Normalize Account Name Variations
 Standardizes inconsistent account name strings commonly found in financial
 data into a single consistent label. For example, variations like
 \code{"Rev."}, \code{"REVENUE"}, and \code{"revenue"} are all mapped to

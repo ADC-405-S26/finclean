@@ -1,4 +1,5 @@
 #' Normalize Account Name Variations
+#'
 #' Standardizes inconsistent account name strings commonly found in financial
 #' data into a single consistent label. For example, variations like
 #' \code{"Rev."}, \code{"REVENUE"}, and \code{"revenue"} are all mapped to
