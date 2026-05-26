@@ -1,0 +1,68 @@
+---
+title: "Introduction to finclean package"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to finclean package}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(finclean)
+```
+
+## What is finclean?
+
+`finclean` is an R package that helps you clean and diagnose messy financial
+data. This vignette walks through how to use each function with the built-in
+sample dataset.
+
+## Load the Dataset
+
+```{r}
+data(finclean_sample)
+finclean_sample
+```
+
+## Parse Currency Strings
+
+```{r}
+parse_currency(finclean_sample$amount)
+```
+
+## Standardize Fiscal Year Formats
+
+```{r}
+standardize_fiscal_year(finclean_sample$period)
+```
+
+## Normalize Account Names
+
+```{r}
+normalize_accounts(finclean_sample$account)
+```
+
+## Flag Outliers
+
+```{r}
+flag_outliers(finclean_sample$revenue)
+```
+
+## Audit the Full Dataset
+
+```{r}
+audit_report(finclean_sample)
+```
+
+## Visualize Outliers
+
+```{r, fig.width=6, fig.height=4}
+plot_outliers(finclean_sample, column = "revenue")
+```

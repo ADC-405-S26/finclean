@@ -5,3 +5,9 @@
 project.Rcheck/
 project*.tar.gz
 project*.tgz
+finclean.Rcheck/
+finclean*.tar.gz
+finclean*.tgz
+inst/doc
+/doc/
+/Meta/

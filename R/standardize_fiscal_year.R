@@ -1,4 +1,5 @@
 #'Standardize Fiscal Year Strings
+#'
 #' Converts a variety of fiscal year and quarter string formats commonly found
 #' in financial data into a single consistent format. The default output format
 #' is \code{"FY2023"} for annual periods and \code{"FY2023-Q1"} for quarterly periods.

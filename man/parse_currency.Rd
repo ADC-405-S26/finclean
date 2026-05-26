@@ -2,10 +2,7 @@
 % Please edit documentation in R/parse_currency.R
 \name{parse_currency}
 \alias{parse_currency}
-\title{Parse Currency Strings to Numeric
-Converts messy currency strings commonly found in financial data into clean
-numeric values. Handles currency symbols, commas, spaces, and accounting-style
-negative numbers written in parentheses.}
+\title{Parse Currency Strings to Numeric}
 \usage{
 parse_currency(x, na_on_fail = TRUE)
 }
@@ -24,7 +21,6 @@ formatting removed. Parentheses-style negatives like \code{"(500)"} are
 correctly converted to \code{-500}.
 }
 \description{
-Parse Currency Strings to Numeric
 Converts messy currency strings commonly found in financial data into clean
 numeric values. Handles currency symbols, commas, spaces, and accounting-style
 negative numbers written in parentheses.

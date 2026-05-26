@@ -9,7 +9,7 @@ finclean_sample <- data.frame(
     "COGS", "cost of goods", "assets", "CASH", "Equity"
   ),
   amount = c(
-    "$1,234.56", "€500", "(1,200)", "-$300.00", "$98,000",
+    "$1,234.56", "EUR500", "(1,200)", "-$300.00", "$98,000",
     "$1,500", "$2,000", "$99,999,999", "(750.00)", "$3,200"
   ),
   revenue = c(
@@ -24,4 +24,4 @@ finclean_sample <- data.frame(
 )
 
 usethis::use_data(finclean_sample, overwrite = TRUE)
-usethis::use_data(finclean_sample_code, overwrite = TRUE)
+

@@ -1,4 +1,5 @@
 #' Parse Currency Strings to Numeric
+#'
 #' Converts messy currency strings commonly found in financial data into clean
 #' numeric values. Handles currency symbols, commas, spaces, and accounting-style
 #' negative numbers written in parentheses.
