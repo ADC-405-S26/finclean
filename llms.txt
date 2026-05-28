@@ -17,6 +17,7 @@ quality, and visualizing anomalies — all in one place.
 You can install `finclean` directly from GitHub:
 
 ``` r
+
 devtools::install_github("ADC-405-S26/finclean")
 ```
 
@@ -34,6 +35,7 @@ devtools::install_github("ADC-405-S26/finclean")
 ## Example Usage
 
 ``` r
+
 library(finclean)
 
 # Load the built-in sample dataset
@@ -43,6 +45,7 @@ data(finclean_sample)
 **Parse messy currency strings**
 
 ``` r
+
 parse_currency(c("$1,234.56", "EUR500", "(1,200)", "-$300.00"))
 #> [1]  1234.56   500.00 -1200.00  -300.00
 ```
@@ -50,6 +53,7 @@ parse_currency(c("$1,234.56", "EUR500", "(1,200)", "-$300.00"))
 **Standardize fiscal year formats**
 
 ``` r
+
 standardize_fiscal_year(c("FY23", "Q1 2023", "2023-Q2", "Q1FY23"))
 #> [1] "FY2023"    "FY2023-Q1" "FY2023-Q2" "FY2023-Q1"
 ```
@@ -57,6 +61,7 @@ standardize_fiscal_year(c("FY23", "Q1 2023", "2023-Q2", "Q1FY23"))
 **Normalize account name variations**
 
 ``` r
+
 normalize_accounts(c("Rev.", "REVENUE", "Expenses", "EXP", "Net Inc."))
 #> [1] "Revenue"  "Revenue"  "Expenses" "Expenses" "Net Income"
 ```
@@ -64,6 +69,7 @@ normalize_accounts(c("Rev.", "REVENUE", "Expenses", "EXP", "Net Inc."))
 **Flag outliers using IQR method**
 
 ``` r
+
 flag_outliers(c(100, 200, 150, 10000, 130, 170))
 #>   value is_outlier
 #> 1   100      FALSE
@@ -77,6 +83,7 @@ flag_outliers(c(100, 200, 150, 10000, 130, 170))
 **Generate a full data quality audit report**
 
 ``` r
+
 audit_report(finclean_sample)
 #>     column      type n_missing pct_missing n_duplicates n_outliers
 #> 1   period character         0           0            0         NA
@@ -89,6 +96,7 @@ audit_report(finclean_sample)
 **Visualize outliers in a column**
 
 ``` r
+
 plot_outliers(finclean_sample, column = "revenue")
 ```
 

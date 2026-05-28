@@ -1,6 +1,7 @@
 # Introduction to finclean package
 
 ``` r
+
 library(finclean)
 ```
 
@@ -20,6 +21,7 @@ currency strings, inconsistent fiscal year formats, account name
 variations, outliers, and missing values.
 
 ``` r
+
 data(finclean_sample)
 finclean_sample
 #>     period       account      amount revenue expenses
@@ -44,6 +46,7 @@ converts these into clean numeric values. Parentheses-style negatives
 like `"(1,200)"` are correctly converted to `-1200`.
 
 ``` r
+
 parse_currency(finclean_sample$amount)
 #>  [1]     1234.56      500.00    -1200.00     -300.00    98000.00     1500.00
 #>  [7]     2000.00 99999999.00     -750.00     3200.00
@@ -56,6 +59,7 @@ Fiscal year labels are often inconsistent across teams and systems.
 normalizes all formats into a consistent `FY####` or `FY####-Q#` output.
 
 ``` r
+
 standardize_fiscal_year(finclean_sample$period)
 #>  [1] "FY2023"    "FY2023-Q1" "FY2023-Q2" "FY2023-Q1" "FY2023"    "FY2023-Q3"
 #>  [7] "FY2024"    "FY2024"    "FY2024-Q2" "FY2024-Q4"
@@ -70,6 +74,7 @@ maps all variations to a single standardized label. Note that if you
 supply a `custom_map`, it will completely replace the built-in mapping.
 
 ``` r
+
 normalize_accounts(finclean_sample$account)
 #>  [1] "Revenue"    "Revenue"    "Expenses"   "Expenses"   "Net Income"
 #>  [6] "COGS"       "COGS"       "Assets"     "Cash"       "Equity"
@@ -83,6 +88,7 @@ method (default) or the z-score method. It returns a data frame with
 each value labeled as an outlier or not.
 
 ``` r
+
 flag_outliers(finclean_sample$revenue)
 #>    value is_outlier
 #> 1    100      FALSE
@@ -105,13 +111,14 @@ scans the entire data frame at once and returns a structured summary of
 missing values, duplicate counts, and outliers for every column.
 
 ``` r
+
 audit_report(finclean_sample)
 #>     column      type n_missing pct_missing n_duplicates n_outliers
 #> 1   period character         0           0            0         NA
 #> 2  account character         0           0            0         NA
 #> 3   amount character         0           0            0         NA
 #> 4  revenue   numeric         1          10            0          1
-#> 5 expenses   numeric         0           0            2          1
+#> 5 expenses   numeric         0           0            1          1
 ```
 
 ## Visualize Outliers
@@ -121,6 +128,7 @@ generates a bar chart that highlights outlier observations in red,
 making it easy to spot anomalies at a glance.
 
 ``` r
+
 plot_outliers(finclean_sample, column = "revenue")
 #> Warning: Removed 1 row containing missing values or values outside the scale range
 #> (`geom_bar()`).
