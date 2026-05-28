@@ -114,7 +114,3 @@ variations, messy currency strings, outliers, and missing values.
   validation
 - [`ggplot2`](https://ggplot2.tidyverse.org/) — visualization
 - [`rlang`](https://rlang.r-lib.org/) — tidy evaluation utilities
-
-## License
-
-MIT © 2025

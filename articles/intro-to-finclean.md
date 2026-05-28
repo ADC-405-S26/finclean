@@ -7,10 +7,17 @@ library(finclean)
 ## What is finclean?
 
 `finclean` is an R package that helps you clean and diagnose messy
-financial data. This vignette walks through how to use each function
-with the built-in sample dataset.
+financial data. Real-world financial datasets often have inconsistent
+formats, missing values, and suspicious entries that need to be
+addressed before any analysis. This vignette walks through each function
+using the built-in sample dataset.
 
 ## Load the Dataset
+
+`finclean` comes with a built-in sample dataset `finclean_sample` that
+contains common data quality issues found in financial data — messy
+currency strings, inconsistent fiscal year formats, account name
+variations, outliers, and missing values.
 
 ``` r
 data(finclean_sample)
@@ -30,6 +37,12 @@ finclean_sample
 
 ## Parse Currency Strings
 
+Financial data often contains currency values stored as strings with
+symbols, commas, and parentheses.
+[`parse_currency()`](https://adc-405-s26.github.io/finclean/reference/parse_currency.md)
+converts these into clean numeric values. Parentheses-style negatives
+like `"(1,200)"` are correctly converted to `-1200`.
+
 ``` r
 parse_currency(finclean_sample$amount)
 #>  [1]     1234.56      500.00    -1200.00     -300.00    98000.00     1500.00
@@ -37,6 +50,10 @@ parse_currency(finclean_sample$amount)
 ```
 
 ## Standardize Fiscal Year Formats
+
+Fiscal year labels are often inconsistent across teams and systems.
+[`standardize_fiscal_year()`](https://adc-405-s26.github.io/finclean/reference/standardize_fiscal_year.md)
+normalizes all formats into a consistent `FY####` or `FY####-Q#` output.
 
 ``` r
 standardize_fiscal_year(finclean_sample$period)
@@ -46,6 +63,12 @@ standardize_fiscal_year(finclean_sample$period)
 
 ## Normalize Account Names
 
+Account names are frequently abbreviated or capitalized differently by
+different people.
+[`normalize_accounts()`](https://adc-405-s26.github.io/finclean/reference/normalize_accounts.md)
+maps all variations to a single standardized label. Note that if you
+supply a `custom_map`, it will completely replace the built-in mapping.
+
 ``` r
 normalize_accounts(finclean_sample$account)
 #>  [1] "Revenue"    "Revenue"    "Expenses"   "Expenses"   "Net Income"
@@ -53,6 +76,11 @@ normalize_accounts(finclean_sample$account)
 ```
 
 ## Flag Outliers
+
+[`flag_outliers()`](https://adc-405-s26.github.io/finclean/reference/flag_outliers.md)
+detects suspicious values in a numeric column using either the IQR
+method (default) or the z-score method. It returns a data frame with
+each value labeled as an outlier or not.
 
 ``` r
 flag_outliers(finclean_sample$revenue)
@@ -71,6 +99,11 @@ flag_outliers(finclean_sample$revenue)
 
 ## Audit the Full Dataset
 
+Instead of checking each column individually,
+[`audit_report()`](https://adc-405-s26.github.io/finclean/reference/audit_report.md)
+scans the entire data frame at once and returns a structured summary of
+missing values, duplicate counts, and outliers for every column.
+
 ``` r
 audit_report(finclean_sample)
 #>     column      type n_missing pct_missing n_duplicates n_outliers
@@ -82,6 +115,10 @@ audit_report(finclean_sample)
 ```
 
 ## Visualize Outliers
+
+[`plot_outliers()`](https://adc-405-s26.github.io/finclean/reference/plot_outliers.md)
+generates a bar chart that highlights outlier observations in red,
+making it easy to spot anomalies at a glance.
 
 ``` r
 plot_outliers(finclean_sample, column = "revenue")

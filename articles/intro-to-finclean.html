@@ -64,17 +64,23 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">finclean</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://adc-405-s26.github.io/finclean/">finclean</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="what-is-finclean">What is finclean?<a class="anchor" aria-label="anchor" href="#what-is-finclean"></a>
 </h2>
 <p><code>finclean</code> is an R package that helps you clean and
-diagnose messy financial data. This vignette walks through how to use
-each function with the built-in sample dataset.</p>
+diagnose messy financial data. Real-world financial datasets often have
+inconsistent formats, missing values, and suspicious entries that need
+to be addressed before any analysis. This vignette walks through each
+function using the built-in sample dataset.</p>
 </div>
 <div class="section level2">
 <h2 id="load-the-dataset">Load the Dataset<a class="anchor" aria-label="anchor" href="#load-the-dataset"></a>
 </h2>
+<p><code>finclean</code> comes with a built-in sample dataset
+<code>finclean_sample</code> that contains common data quality issues
+found in financial data — messy currency strings, inconsistent fiscal
+year formats, account name variations, outliers, and missing values.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">finclean_sample</span><span class="op">)</span></span>
 <span><span class="va">finclean_sample</span></span>
@@ -93,6 +99,11 @@ each function with the built-in sample dataset.</p>
 <div class="section level2">
 <h2 id="parse-currency-strings">Parse Currency Strings<a class="anchor" aria-label="anchor" href="#parse-currency-strings"></a>
 </h2>
+<p>Financial data often contains currency values stored as strings with
+symbols, commas, and parentheses. <code><a href="../reference/parse_currency.html">parse_currency()</a></code> converts
+these into clean numeric values. Parentheses-style negatives like
+<code>"(1,200)"</code> are correctly converted to
+<code>-1200</code>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/parse_currency.html">parse_currency</a></span><span class="op">(</span><span class="va">finclean_sample</span><span class="op">$</span><span class="va">amount</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  [1]     1234.56      500.00    -1200.00     -300.00    98000.00     1500.00</span></span>
@@ -101,6 +112,9 @@ each function with the built-in sample dataset.</p>
 <div class="section level2">
 <h2 id="standardize-fiscal-year-formats">Standardize Fiscal Year Formats<a class="anchor" aria-label="anchor" href="#standardize-fiscal-year-formats"></a>
 </h2>
+<p>Fiscal year labels are often inconsistent across teams and systems.
+<code><a href="../reference/standardize_fiscal_year.html">standardize_fiscal_year()</a></code> normalizes all formats into a
+consistent <code>FY####</code> or <code>FY####-Q#</code> output.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/standardize_fiscal_year.html">standardize_fiscal_year</a></span><span class="op">(</span><span class="va">finclean_sample</span><span class="op">$</span><span class="va">period</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  [1] "FY2023"    "FY2023-Q1" "FY2023-Q2" "FY2023-Q1" "FY2023"    "FY2023-Q3"</span></span>
@@ -109,6 +123,11 @@ each function with the built-in sample dataset.</p>
 <div class="section level2">
 <h2 id="normalize-account-names">Normalize Account Names<a class="anchor" aria-label="anchor" href="#normalize-account-names"></a>
 </h2>
+<p>Account names are frequently abbreviated or capitalized differently
+by different people. <code><a href="../reference/normalize_accounts.html">normalize_accounts()</a></code> maps all
+variations to a single standardized label. Note that if you supply a
+<code>custom_map</code>, it will completely replace the built-in
+mapping.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/normalize_accounts.html">normalize_accounts</a></span><span class="op">(</span><span class="va">finclean_sample</span><span class="op">$</span><span class="va">account</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  [1] "Revenue"    "Revenue"    "Expenses"   "Expenses"   "Net Income"</span></span>
@@ -117,6 +136,9 @@ each function with the built-in sample dataset.</p>
 <div class="section level2">
 <h2 id="flag-outliers">Flag Outliers<a class="anchor" aria-label="anchor" href="#flag-outliers"></a>
 </h2>
+<p><code><a href="../reference/flag_outliers.html">flag_outliers()</a></code> detects suspicious values in a numeric
+column using either the IQR method (default) or the z-score method. It
+returns a data frame with each value labeled as an outlier or not.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/flag_outliers.html">flag_outliers</a></span><span class="op">(</span><span class="va">finclean_sample</span><span class="op">$</span><span class="va">revenue</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    value is_outlier</span></span>
@@ -134,6 +156,10 @@ each function with the built-in sample dataset.</p>
 <div class="section level2">
 <h2 id="audit-the-full-dataset">Audit the Full Dataset<a class="anchor" aria-label="anchor" href="#audit-the-full-dataset"></a>
 </h2>
+<p>Instead of checking each column individually,
+<code><a href="../reference/audit_report.html">audit_report()</a></code> scans the entire data frame at once and
+returns a structured summary of missing values, duplicate counts, and
+outliers for every column.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/audit_report.html">audit_report</a></span><span class="op">(</span><span class="va">finclean_sample</span><span class="op">)</span></span>
 <span><span class="co">#&gt;     column      type n_missing pct_missing n_duplicates n_outliers</span></span>
@@ -146,6 +172,9 @@ each function with the built-in sample dataset.</p>
 <div class="section level2">
 <h2 id="visualize-outliers">Visualize Outliers<a class="anchor" aria-label="anchor" href="#visualize-outliers"></a>
 </h2>
+<p><code><a href="../reference/plot_outliers.html">plot_outliers()</a></code> generates a bar chart that highlights
+outlier observations in red, making it easy to spot anomalies at a
+glance.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_outliers.html">plot_outliers</a></span><span class="op">(</span><span class="va">finclean_sample</span>, column <span class="op">=</span> <span class="st">"revenue"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning: Removed 1 row containing missing values or values outside the scale range</span></span>

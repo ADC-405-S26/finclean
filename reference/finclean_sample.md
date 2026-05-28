@@ -89,5 +89,5 @@ audit_report(finclean_sample)
 #> 2  account character         0           0            0         NA
 #> 3   amount character         0           0            0         NA
 #> 4  revenue   numeric         1          10            0          1
-#> 5 expenses   numeric         0           0            2          1
+#> 5 expenses   numeric         0           0            1          1
 ```

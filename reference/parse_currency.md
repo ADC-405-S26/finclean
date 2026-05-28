@@ -15,8 +15,8 @@ parse_currency(x, na_on_fail = TRUE)
 - x:
 
   A character vector of currency strings to convert. Examples of
-  supported formats: `"$1,234.56"`, `"€500"`, `"(1,200)"`, `"-$300.00"`,
-  `"1 000.50"`.
+  supported formats: `"$1,234.56"`, `"EUR500"`, `"(1,200)"`,
+  `"-$300.00"`,`"-EUR500"`, `"1 000.50"`.
 
 - na_on_fail:
 
@@ -27,8 +27,8 @@ parse_currency(x, na_on_fail = TRUE)
 ## Value
 
 A numeric vector of the same length as `x`, with currency formatting
-removed. Parentheses-style negatives like `"(500)"` are correctly
-converted to `-500`.
+removed. Parentheses-style negatives like `"(500)"` and minus-sign
+negatives like `"-EUR500"` are correctly converted to `-500`.
 
 ## Examples
 

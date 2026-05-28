@@ -24,9 +24,10 @@ flag_outliers(x, method = "iqr", threshold = NULL)
 
 - threshold:
 
-  A single numeric value controlling outlier sensitivity. For `"iqr"`,
-  this is the multiplier applied to the IQR (default `1.5`). For
-  `"zscore"`, this is the z-score cutoff (default `3`).
+  A single numeric value controlling outlier sensitivity. Must be
+  greater than zero. For `"iqr"`, this is the multiplier applied to the
+  IQR (default `1.5`). For `"zscore"`, this is the z-score cutoff
+  (default `3`).
 
 ## Value
 
@@ -38,7 +39,8 @@ A data frame with two columns:
 
 - is_outlier:
 
-  Logical. `TRUE` if the value is flagged as an outlier.
+  Logical. `TRUE` if the value is flagged as an outlier. Returns `FALSE`
+  for all values if all non-missing values are identical.
 
 ## Examples
 

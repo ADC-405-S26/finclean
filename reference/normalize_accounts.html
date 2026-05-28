@@ -65,7 +65,9 @@ data into a single consistent label. For example, variations like
 <dd><p>A named character vector where names are the desired
 standardized labels and values are regex patterns to match against.
 If <code>NULL</code> (default), a built-in mapping of common financial account
-names is used.</p></dd>
+names is used. Note: providing a <code>custom_map</code> completely replaces
+the default mapping, built-in account names will no longer be recognized
+unless explicitly included in your custom map.</p></dd>
 
 
 <dt id="arg-na-on-fail">na_on_fail<a class="anchor" aria-label="anchor" href="#arg-na-on-fail"></a></dt>

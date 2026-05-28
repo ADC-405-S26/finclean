@@ -17,7 +17,8 @@ standardize_fiscal_year(x, prefix = "FY")
 
   A character vector of fiscal year strings to standardize. Supported
   input formats include: `"FY23"`, `"FY2023"`, `"2023"`, `"Q1 2023"`,
-  `"2023-Q1"`, `"Q1-2023"`, `"Q1FY23"`.
+  `"2023-Q1"`, `"Q1-2023"`, `"Q1FY23"`. Quarter and year may be
+  separated by a single space or dash.
 
 - prefix:
 
@@ -28,7 +29,8 @@ standardize_fiscal_year(x, prefix = "FY")
 
 A character vector of the same length as `x` with all fiscal year
 strings converted to a consistent format. Unrecognized formats are
-returned as `NA` with a warning.
+returned as `NA` with a warning.Only exact 2-digit or 4-digit years are
+accepted; 3-digit or 5-digit years are treated as unrecognized.
 
 ## Examples
 

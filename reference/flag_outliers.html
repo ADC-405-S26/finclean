@@ -68,9 +68,9 @@ Either <code>"iqr"</code> (default) or <code>"zscore"</code>.</p></dd>
 
 <dt id="arg-threshold">threshold<a class="anchor" aria-label="anchor" href="#arg-threshold"></a></dt>
 <dd><p>A single numeric value controlling outlier sensitivity.
-For <code>"iqr"</code>, this is the multiplier applied to the IQR (default
-<code>1.5</code>). For <code>"zscore"</code>, this is the z-score cutoff
-(default <code>3</code>).</p></dd>
+Must be greater than zero. For <code>"iqr"</code>, this is the multiplier
+applied to the IQR (default <code>1.5</code>). For <code>"zscore"</code>, this is
+the z-score cutoff (default <code>3</code>).</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -79,7 +79,9 @@ For <code>"iqr"</code>, this is the multiplier applied to the IQR (default
 <dd><p>The original numeric values from <code>x</code>.</p></dd>
 
 <dt>is_outlier</dt>
-<dd><p>Logical. <code>TRUE</code> if the value is flagged as an outlier.</p></dd>
+<dd><p>Logical. <code>TRUE</code> if the value is flagged as an
+outlier. Returns <code>FALSE</code> for all values if all non-missing values
+are identical.</p></dd>
 
 
 </dl></div>

@@ -56,8 +56,8 @@ negative numbers written in parentheses.</p>
 
 <dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
 <dd><p>A character vector of currency strings to convert.
-Examples of supported formats: <code>"$1,234.56"</code>, <code>"€500"</code>,
-<code>"(1,200)"</code>, <code>"-$300.00"</code>, <code>"1 000.50"</code>.</p></dd>
+Examples of supported formats: <code>"$1,234.56"</code>, <code>"EUR500"</code>,
+<code>"(1,200)"</code>, <code>"-$300.00"</code>,<code>"-EUR500"</code>, <code>"1 000.50"</code>.</p></dd>
 
 
 <dt id="arg-na-on-fail">na_on_fail<a class="anchor" aria-label="anchor" href="#arg-na-on-fail"></a></dt>
@@ -69,8 +69,9 @@ function will stop with an error on unparseable input.</p></dd>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A numeric vector of the same length as <code>x</code>, with currency
-formatting removed. Parentheses-style negatives like <code>"(500)"</code> are
-correctly converted to <code>-500</code>.</p>
+formatting removed. Parentheses-style negatives like <code>"(500)"</code> and
+minus-sign negatives like <code>"-EUR500"</code> are correctly converted to
+<code>-500</code>.</p>
     </div>
 
     <div class="section level2">

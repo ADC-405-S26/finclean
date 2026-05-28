@@ -58,7 +58,7 @@ is <code>"FY2023"</code> for annual periods and <code>"FY2023-Q1"</code> for qua
 <dd><p>A character vector of fiscal year strings to standardize.
 Supported input formats include: <code>"FY23"</code>, <code>"FY2023"</code>,
 <code>"2023"</code>, <code>"Q1 2023"</code>, <code>"2023-Q1"</code>, <code>"Q1-2023"</code>,
-<code>"Q1FY23"</code>.</p></dd>
+<code>"Q1FY23"</code>. Quarter and year may be separated by a single space or dash.</p></dd>
 
 
 <dt id="arg-prefix">prefix<a class="anchor" aria-label="anchor" href="#arg-prefix"></a></dt>
@@ -70,7 +70,8 @@ Defaults to <code>"FY"</code>.</p></dd>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A character vector of the same length as <code>x</code> with all fiscal
 year strings converted to a consistent format. Unrecognized formats are
-returned as <code>NA</code> with a warning.</p>
+returned as <code>NA</code> with a warning.Only exact 2-digit or 4-digit years
+are accepted; 3-digit or 5-digit years are treated as unrecognized.</p>
     </div>
 
     <div class="section level2">

@@ -15,7 +15,7 @@ audit_report(df, outlier_method = "iqr", threshold = NULL)
 
 - df:
 
-  A data frame to audit.
+  A data frame to audit. Must have at least one column.
 
 - outlier_method:
 
@@ -51,7 +51,8 @@ A data frame with one row per column in `df` and the following columns:
 
 - n_duplicates:
 
-  Number of duplicate values in the column.
+  Number of values that appear more than once, counted as pairs. For
+  example, if `"A"` appears twice, that counts as 1 duplicate pair.
 
 - n_outliers:
 
@@ -68,11 +69,11 @@ df <- data.frame(
 audit_report(df)
 #>     column      type n_missing pct_missing n_duplicates n_outliers
 #> 1  revenue   numeric         1        16.7            0          1
-#> 2 category character         0         0.0            6         NA
-#> 3 expenses   numeric         0         0.0            2          0
+#> 2 category character         0         0.0            3         NA
+#> 3 expenses   numeric         0         0.0            1          0
 audit_report(df, outlier_method = "zscore", threshold = 2)
 #>     column      type n_missing pct_missing n_duplicates n_outliers
 #> 1  revenue   numeric         1        16.7            0          0
-#> 2 category character         0         0.0            6         NA
-#> 3 expenses   numeric         0         0.0            2          0
+#> 2 category character         0         0.0            3         NA
+#> 3 expenses   numeric         0         0.0            1          0
 ```

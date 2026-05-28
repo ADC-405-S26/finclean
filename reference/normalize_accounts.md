@@ -22,7 +22,9 @@ normalize_accounts(x, custom_map = NULL, na_on_fail = TRUE)
   A named character vector where names are the desired standardized
   labels and values are regex patterns to match against. If `NULL`
   (default), a built-in mapping of common financial account names is
-  used.
+  used. Note: providing a `custom_map` completely replaces the default
+  mapping, built-in account names will no longer be recognized unless
+  explicitly included in your custom map.
 
 - na_on_fail:
 
