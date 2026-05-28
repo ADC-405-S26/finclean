@@ -10,7 +10,7 @@ standardize_fiscal_year(x, prefix = "FY")
 \item{x}{A character vector of fiscal year strings to standardize.
 Supported input formats include: \code{"FY23"}, \code{"FY2023"},
 \code{"2023"}, \code{"Q1 2023"}, \code{"2023-Q1"}, \code{"Q1-2023"},
-\code{"Q1FY23"}.}
+\code{"Q1FY23"}. Quarter and year may be separated by a single space or dash.}
 
 \item{prefix}{A single character string to use as the fiscal year prefix.
 Defaults to \code{"FY"}.}
@@ -18,7 +18,8 @@ Defaults to \code{"FY"}.}
 \value{
 A character vector of the same length as \code{x} with all fiscal
 year strings converted to a consistent format. Unrecognized formats are
-returned as \code{NA} with a warning.
+returned as \code{NA} with a warning.Only exact 2-digit or 4-digit years
+are accepted; 3-digit or 5-digit years are treated as unrecognized.
 }
 \description{
 Converts a variety of fiscal year and quarter string formats commonly found

@@ -15,6 +15,7 @@ test_that("flag_outliers correctly flags outliers using zscore method", {
   expect_true(result$is_outlier[6])
   expect_false(result$is_outlier[1])
 })
+
 test_that("flag_outliers respects custom threshold", {
   result <- flag_outliers(c(100, 105, 98, 102, 99, 101), threshold = 100)
   expect_false(any(result$is_outlier, na.rm = TRUE))
@@ -23,6 +24,18 @@ test_that("flag_outliers respects custom threshold", {
 test_that("flag_outliers handles NA values without error", {
   result <- flag_outliers(c(100, NA, 150, 10000, 130))
   expect_true(is.na(result$is_outlier[2]))
+})
+
+test_that("flag_outliers returns FALSE for all values when all values are identical using zscore", {
+  result <- flag_outliers(c(100, 100, 100, 100), method = "zscore")
+  expect_true(all(result$is_outlier == FALSE))
+})
+
+test_that("flag_outliers stops with error when threshold is negative", {
+  expect_error(
+    flag_outliers(c(100, 200, 300), threshold = -1),
+    "threshold must be a positive number"
+  )
 })
 
 test_that("flag_outliers rejects non-numeric input", {

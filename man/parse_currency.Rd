@@ -8,8 +8,8 @@ parse_currency(x, na_on_fail = TRUE)
 }
 \arguments{
 \item{x}{A character vector of currency strings to convert.
-Examples of supported formats: \code{"$1,234.56"}, \code{"€500"},
-\code{"(1,200)"}, \code{"-$300.00"}, \code{"1 000.50"}.}
+Examples of supported formats: \code{"$1,234.56"}, \code{"EUR500"},
+\code{"(1,200)"}, \code{"-$300.00"},\code{"-EUR500"}, \code{"1 000.50"}.}
 
 \item{na_on_fail}{Logical. If \code{TRUE} (default), values that cannot be
 parsed will be returned as \code{NA} with a warning. If \code{FALSE}, the
@@ -17,8 +17,9 @@ function will stop with an error on unparseable input.}
 }
 \value{
 A numeric vector of the same length as \code{x}, with currency
-formatting removed. Parentheses-style negatives like \code{"(500)"} are
-correctly converted to \code{-500}.
+formatting removed. Parentheses-style negatives like \code{"(500)"} and
+minus-sign negatives like \code{"-EUR500"} are correctly converted to
+\code{-500}.
 }
 \description{
 Converts messy currency strings commonly found in financial data into clean

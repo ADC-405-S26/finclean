@@ -1,5 +1,5 @@
 test_that("parse_currency handles basic currency symbols", {
-  result <- parse_currency(c("$1,234.56", "€500", "£300"))
+  result <- parse_currency(c("$1,234.56", "EUR500", "GBP300"))
   expect_equal(result, c(1234.56, 500, 300))
 })
 
@@ -11,6 +11,11 @@ test_that("parse_currency converts parentheses to negative numbers", {
 test_that("parse_currency handles explicit negative signs", {
   result <- parse_currency(c("-$300.00", "-500"))
   expect_equal(result, c(-300, -500))
+})
+
+test_that("parse_currency handles negative sign before currency code", {
+  result <- parse_currency(c("-EUR500", "-USD100"))
+  expect_equal(result, c(-500, -100))
 })
 
 test_that("parse_currency returns NA with warning on bad input when na_on_fail = TRUE", {

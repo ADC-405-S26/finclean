@@ -1,9 +1,12 @@
 Package: finclean
-Title: What the Package Does (One Line, Title Case)
+Title: Financial Data Cleaning and Diagnostics Toolkit
 Version: 0.0.0.9000
 Authors@R: 
     person("Tasnim Ara", "Siddique", , "siddiqut@lawrence.edu", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Description: Provides tools for cleaning and diagnosing messy financial datasets.
+    Includes functions for parsing currency strings, standardizing fiscal year
+    formats, normalizing account names, detecting outliers, auditing data quality,
+    and visualizing anomalies in financial data.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
@@ -22,3 +25,4 @@ Depends:
     R (>= 3.5)
 LazyData: true
 VignetteBuilder: knitr
+URL: https://adc-405-s26.github.io/finclean/

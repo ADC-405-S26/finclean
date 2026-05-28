@@ -10,7 +10,9 @@
 #' @param custom_map A named character vector where names are the desired
 #'   standardized labels and values are regex patterns to match against.
 #'   If \code{NULL} (default), a built-in mapping of common financial account
-#'   names is used.
+#'   names is used. Note: providing a \code{custom_map} completely replaces
+#'   the default mapping, built-in account names will no longer be recognized
+#'   unless explicitly included in your custom map.
 #' @param na_on_fail Logical. If \code{TRUE} (default), unmatched values are
 #'   returned as \code{NA} with a warning. If \code{FALSE}, unmatched values
 #'   are returned as-is unchanged.

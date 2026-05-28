@@ -7,7 +7,7 @@
 audit_report(df, outlier_method = "iqr", threshold = NULL)
 }
 \arguments{
-\item{df}{A data frame to audit.}
+\item{df}{A data frame to audit. Must have at least one column.}
 
 \item{outlier_method}{A single character string specifying the outlier
 detection method to use. Either \code{"iqr"} (default) or \code{"zscore"}.
@@ -25,8 +25,11 @@ columns:
 \item{type}{The data type of the column.}
 \item{n_missing}{Number of \code{NA} values.}
 \item{pct_missing}{Percentage of values that are \code{NA}.}
-\item{n_duplicates}{Number of duplicate values in the column.}
-\item{n_outliers}{Number of outliers detected. \code{NA} for non-numeric columns.}
+\item{n_duplicates}{Number of values that appear more than once,
+counted as pairs. For example, if \code{"A"} appears twice, that
+counts as 1 duplicate pair.}
+\item{n_outliers}{Number of outliers detected. \code{NA} for
+non-numeric columns.}
 }
 }
 \description{

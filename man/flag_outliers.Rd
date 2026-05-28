@@ -13,15 +13,17 @@ flag_outliers(x, method = "iqr", threshold = NULL)
 Either \code{"iqr"} (default) or \code{"zscore"}.}
 
 \item{threshold}{A single numeric value controlling outlier sensitivity.
-For \code{"iqr"}, this is the multiplier applied to the IQR (default
-\code{1.5}). For \code{"zscore"}, this is the z-score cutoff
-(default \code{3}).}
+Must be greater than zero. For \code{"iqr"}, this is the multiplier
+applied to the IQR (default \code{1.5}). For \code{"zscore"}, this is
+the z-score cutoff (default \code{3}).}
 }
 \value{
 A data frame with two columns:
 \describe{
 \item{value}{The original numeric values from \code{x}.}
-\item{is_outlier}{Logical. \code{TRUE} if the value is flagged as an outlier.}
+\item{is_outlier}{Logical. \code{TRUE} if the value is flagged as an
+outlier. Returns \code{FALSE} for all values if all non-missing values
+are identical.}
 }
 }
 \description{

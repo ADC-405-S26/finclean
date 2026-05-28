@@ -5,7 +5,8 @@ test_that("audit_report returns a data frame with correct columns", {
   )
   result <- audit_report(df)
   expect_s3_class(result, "data.frame")
-  expect_named(result, c("column", "type", "n_missing", "pct_missing", "n_duplicates", "n_outliers"))
+  expect_named(result, c("column", "type", "n_missing", "pct_missing",
+                         "n_duplicates", "n_outliers"))
 })
 
 test_that("audit_report has one row per column in input data frame", {
@@ -25,6 +26,12 @@ test_that("audit_report correctly counts missing values", {
   expect_equal(result$pct_missing[1], 40)
 })
 
+test_that("audit_report correctly counts duplicate pairs not total rows", {
+  df <- data.frame(category = c("A", "A", "B", "B", "C", "C"))
+  result <- audit_report(df)
+  expect_equal(result$n_duplicates[1], 3)
+})
+
 test_that("audit_report correctly counts outliers for numeric columns", {
   df <- data.frame(revenue = c(100, 200, 150, 10000, 130, 170))
   result <- audit_report(df)
@@ -41,6 +48,15 @@ test_that("audit_report works with zscore method", {
   df <- data.frame(revenue = c(100, 200, 150, 10000, 130, 170))
   result <- audit_report(df, outlier_method = "zscore", threshold = 2)
   expect_s3_class(result, "data.frame")
+})
+
+test_that("audit_report handles empty data frame gracefully", {
+  expect_message(
+    result <- audit_report(data.frame()),
+    "empty"
+  )
+  expect_s3_class(result, "data.frame")
+  expect_equal(nrow(result), 0)
 })
 
 test_that("audit_report rejects non-data-frame input", {

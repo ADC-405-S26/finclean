@@ -11,3 +11,7 @@
 ^finclean.*\.tgz$
 ^doc$
 ^Meta$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^\.github$
